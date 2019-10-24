@@ -9,14 +9,16 @@ public class Main {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		Pessoa adiel = new Pessoa();
-		//adiel.setNome("Adiel");
-		//adiel.setIdade(27);
-		//adiel.setPeso(65.3);
+		 
+		adiel.consultar(10);
+		adiel.setNome("Ciclaano");
+		adiel.setIdade(50);
+		//adiel.setPeso(2);
 		
-		//adiel.insert();
-		
-		adiel.consultar(1);
-		System.out.println(adiel.getNome());
+		adiel.save();
+		//#TODO tentar implementar!!
+		//criar Pessoas -> vetor, classe de Pessoa's
+		//consulta que busca mais de uma pessoa
 		
 
 	}
