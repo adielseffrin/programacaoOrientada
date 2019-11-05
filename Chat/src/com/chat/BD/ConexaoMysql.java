@@ -24,8 +24,8 @@ public class ConexaoMysql {
 			String mydatabase = "u238299671_chat_poo"; // nome do seu banco de dados
 			String timezone = "useTimezone=true&serverTimezone=America/Sao_Paulo";
 			String url = "jdbc:mysql://" + serverName + "/" + mydatabase + "?" + timezone;
-			String username = "u238299671_aluno_xxx"; // nome de um usu�rio de seu BD
-			String password = "xxx"; // sua senha de acesso
+			String username = "u238299671_aluno_poo"; // nome de um usu�rio de seu BD
+			String password = "123456789"; // sua senha de acesso
 			connection = DriverManager.getConnection(url, username, password);
 
 			if (connection != null) {
