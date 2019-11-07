@@ -13,7 +13,7 @@ public class Consultas {
 			conn.conectarMySQL();
 			String query = "SELECT id, nome FROM usuarios";
 			ResultSet rs = conn.execute(query);
-			if (rs.next()) {
+			while (rs.next()) {
 				resultado += String.format("%d - %s%n", rs.getInt("id"), rs.getString("nome"));
 			}
 			conn.FecharConexao();
