@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
 import com.chat.BD.ConexaoMysql;
+import com.chat.model.Mensageiro;
 import com.chat.model.Usuario;
 import com.chat.util.Consultas;
 
@@ -19,7 +20,10 @@ public class Main {
 		Scanner in = new Scanner(System.in);
 		int opt;
 		String aux = "", auxPass = "";
-		boolean loop = true;
+		boolean loop = true, senhaValida = false;
+		JPasswordField password;
+		JLabel rotulo;
+		JPanel entUsuario;
 		//primeiro menu
 		do {
 			aux = JOptionPane.showInputDialog("Selecione uma opção:\n1 - Cadastrar\n2 - Listar\n3 - Iniciar");
@@ -29,14 +33,14 @@ public class Main {
 			case 1:
 				aux = JOptionPane.showInputDialog("Digite seu nome:");
 				
-				JPasswordField password = new JPasswordField(10);
+				password = new JPasswordField(10);
 				password.setEchoChar('*'); 
 
 				// Cria um rótulo para o campo
-				JLabel rotulo = new JLabel("Entre com a senha:");
+				rotulo = new JLabel("Entre com a senha:");
 						
 				// Coloca o rótulo e a caixa de entrada numa JPanel:
-				JPanel entUsuario = new JPanel();
+				entUsuario = new JPanel();
 				entUsuario.add(rotulo);
 				entUsuario.add(password);
 
@@ -51,6 +55,28 @@ public class Main {
 				JOptionPane.showMessageDialog(null,Consultas.consultarUsuarios());
 				break;
 			case 3:
+				aux = JOptionPane.showInputDialog("Digite sua Id:");
+				password = new JPasswordField(10);
+				password.setEchoChar('*'); 
+
+				// Cria um rótulo para o campo
+				rotulo = new JLabel("Entre com a senha:");
+						
+				// Coloca o rótulo e a caixa de entrada numa JPanel:
+				entUsuario = new JPanel();
+				entUsuario.add(rotulo);
+				entUsuario.add(password);
+
+				// Mostra o rótulo e a caixa de entrada de password para o usuario fornecer a senha:
+				JOptionPane.showMessageDialog(null, entUsuario, "Acesso restrito", JOptionPane.PLAIN_MESSAGE);
+
+				auxPass = new String(password.getPassword());
+				senhaValida = Consultas.validaSenha(aux, auxPass);
+				if(senhaValida) {
+					Mensageiro msg = new Mensageiro();
+					msg.menu();
+				}else
+					JOptionPane.showMessageDialog(null,"Senha Inválida");
 				break;
 			default:
 				loop = false;	

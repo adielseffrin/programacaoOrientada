@@ -1,5 +1,6 @@
 package com.chat.util;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -22,6 +23,30 @@ public class Consultas {
 			e.printStackTrace();
 		}
 
+		return resultado;
+	}
+	
+	public static boolean validaSenha(String user, String senha) {
+		boolean resultado = false;
+		String senhaBD = "";
+		try {
+			ConexaoMysql conn = new ConexaoMysql();
+			conn.conectarMySQL();
+			String query = "SELECT senha FROM usuarios WHERE id = ?";
+
+			PreparedStatement preparedStatement = conn.connection.prepareStatement(query);
+			preparedStatement.setString(1, user);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			if (rs.first()) {
+				senhaBD = rs.getString("senha");
+			}
+			conn.FecharConexao();
+			resultado = Md5.criptografa(senha).contentEquals(senhaBD);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
 		return resultado;
 	}
 }
