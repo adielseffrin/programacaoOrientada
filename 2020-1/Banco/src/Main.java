@@ -6,42 +6,50 @@ public class Main {
 		String nomeParaSalvar ="";
 		double valorTransacao = 0;
 		
-		//exibe um mensagem 
-		JOptionPane.showMessageDialog(null, "Ol�, bem vindo ao banco!",
+		//Exibe uma mensagem 
+		JOptionPane.showMessageDialog(null, "Olá, bem vindo ao banco!",
 				"BANCO", JOptionPane.PLAIN_MESSAGE);
-		//exibe uma caixa de input
-		//armazena o resultado em nomeParaSalvar
+		
+		//Exibe uma caixa de input e armazena o resultado em nomeParaSalvar
 		nomeParaSalvar = JOptionPane.showInputDialog(null, "Qual o nome do titular:",
 				"BANCO",JOptionPane.QUESTION_MESSAGE);
 		
-		/*instanciando e inicializando objeto contaParaUsar
-		do tipo Conta*/
+		/*Instancia e inicializa objeto contaParaUsar do tipo Conta*/
 		Conta contaParaUsar = new Conta(nomeParaSalvar,0);
 		
-		JOptionPane.showMessageDialog(null, contaParaUsar.retornaSituacao());
-		//
+		int opcao = 0;
 		
-		//deposito
-		valorTransacao = Double.parseDouble( 
-				JOptionPane.showInputDialog(null, "Qual o valor do deposito:",
-				"BANCO",JOptionPane.QUESTION_MESSAGE)
-				);
-		
-		contaParaUsar.depositar(valorTransacao);
-		JOptionPane.showMessageDialog(null, contaParaUsar.retornaSituacao());
-		
-		//saque
-		valorTransacao = Double.parseDouble( 
-				JOptionPane.showInputDialog(null, "Qual o valor do saque:",
-				"BANCO",JOptionPane.QUESTION_MESSAGE)
-				);
-		if(contaParaUsar.podeSacar(valorTransacao))
-			contaParaUsar.sacar(valorTransacao);
-		else		
-			JOptionPane.showMessageDialog(null, "N�o tem saldo");
-		
-		JOptionPane.showMessageDialog(null, contaParaUsar.retornaSituacao());
-		
+		while (opcao != 3 && opcao != -1) {
+			//Exibe menu de opções
+			opcao = JOptionPane.showOptionDialog(null, 
+						"Selecione a opção", //Mensagem
+						"Menu", //Titulo
+						JOptionPane.YES_NO_CANCEL_OPTION, //Tipo do menu de opções 
+						JOptionPane.INFORMATION_MESSAGE, //Tipo da mensagem
+						null, //Icone a ser utilizado na mensagem (padrão)
+						new String[] { "Depositar", "Sacar", "Informações", "Sair" }, //Opções do menu
+						"Informações"); //Opção destacada (padrão)
+			
+			if (opcao == 0) {  //Depósito
+				valorTransacao = Double.parseDouble( 
+						JOptionPane.showInputDialog(null, "Qual o valor do deposito:",
+						"BANCO",JOptionPane.QUESTION_MESSAGE)
+						);
+				
+				contaParaUsar.depositar(valorTransacao);
+			} else if (opcao == 1) { //Saque
+				valorTransacao = Double.parseDouble( 
+						JOptionPane.showInputDialog(null, "Qual o valor do saque:",
+						"BANCO",JOptionPane.QUESTION_MESSAGE)
+						);
+				
+				if(contaParaUsar.podeSacar(valorTransacao))
+					contaParaUsar.sacar(valorTransacao);
+				else		
+					JOptionPane.showMessageDialog(null, "Não tem saldo");
+			} else if (opcao == 2) { //Informações da conta
+				JOptionPane.showMessageDialog(null, contaParaUsar.retornaSituacao());
+			}
+		}
 	}
-
 }

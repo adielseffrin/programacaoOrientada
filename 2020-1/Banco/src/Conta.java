@@ -1,5 +1,5 @@
 /*
- * Definição de uma classe
+ * DefiniÃ§Ã£o de uma classe
  * visibilidade publica
  * */
 public class Conta {
@@ -22,23 +22,23 @@ public class Conta {
 	}
 
 	/*
-	 * Método -> Ação/Função visibilidade publica -> Qualquer classe/objeto pode ver
-	 * recebe um double (s) retorna void -> não retorna nada
+	 * MÃ©todo -> AÃ§Ã£o/FunÃ§Ã£o visibilidade pÃºblica -> qualquer classe/objeto pode ver
+	 * Recebe um double (s) e retorna void -> nÃ£o retorna nada
 	 */
 	public void setSaldo(double s) {
 		saldo = s;
 	}
 
 	/*
-	 * Método -> Ação/Função visibilidade publica -> Qualquer classe/objeto pode ver
-	 * recebe (nada) retorna double (saldo)
+	 * MÃ©todo -> AÃ§Ã£o/FunÃ§Ã£o visibilidade pÃºblica -> qualquer classe/objeto pode ver
+	 * recebe (nada) e retorna double (saldo)
 	 */
 	public double getSaldo() {
 		return saldo;
 	}
 	
 	/*
-	 * método para depositar
+	 * MÃ©todo para depositar
 	 * receber um double (v)
 	 * retornar nada (void)
 	 * */
@@ -46,14 +46,16 @@ public class Conta {
 		saldo += v;
 	}
 	
-	  public boolean podeSacar(double v){
-		    if(v <= saldo) return true;
-		    else return false;
-		  }
+	public boolean podeSacar(double v){
+		if(v <= saldo) 
+			return true;
+		else 
+			return false;
+	}
 	
-	  public void sacar(double v){
-		    saldo -= v;
-		  }
+	public void sacar(double v){
+		saldo -= v;
+	}
 	
 	/*
 	 * %s -> String
@@ -63,10 +65,9 @@ public class Conta {
 	 * 
 	 * %n -> nova linha
 	 * 
-	 * %.x -> número de casas depois da ,
+	 * %.x -> nÃºmero de casas depois do separador decimal
 	 * */
-	
 	public String retornaSituacao(){
-	    return String.format("Nome do titular: %s%nSaldo: R$ %.2f",nome,saldo);
-	  }
+		return String.format("Nome do titular: %s%nSaldo: R$ %.2f",nome,saldo);
+	}
 }
