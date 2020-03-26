@@ -9,7 +9,7 @@ public class Main {
 		//Perguntas quantas notas o aluno teve
 		//Perguntar quais são as notas
 		//Exibir a média
-		/*Scanner leitor = new Scanner(System.in);
+		Scanner leitor = new Scanner(System.in);
 		System.out.println("Informe a quantidade de notas");
 		int qtdNotas = leitor.nextInt();
 		double nota = 0, totalNota = 0;
@@ -23,15 +23,12 @@ public class Main {
 		}
 		
 		System.out.println(String.format("A média das notas é: %f%nParabéns; Não fez mais que a obrigação.",totalNota/qtdNotas));
-*/
+
 		
 		//++a <- o ++ ta antes da variavel -> arruma a variavel -> faz o resto
 		//a++ <- o ++ tá depois da variavel -> faz o que a linha pede -> arruma a variavel
 		
-		int a = 18;
-		pessoa.setIdade(a++); -> 18
-		pessoa2.setIdade(a); -> 19
-		pessoa3.setIdade(++a); -> 20
+		
 
 		
 		

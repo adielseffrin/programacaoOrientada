@@ -1,3 +1,5 @@
+import java.util.Calendar;
+
 import javax.swing.JOptionPane;
 
 public class Main {
@@ -43,9 +45,13 @@ public class Main {
 						"BANCO",JOptionPane.QUESTION_MESSAGE)
 						);
 				
-				if(contaParaUsar.podeSacar(valorTransacao))
-					contaParaUsar.sacar(valorTransacao);
-				else		
+				if(contaParaUsar.podeSacarSaldo(valorTransacao)) {
+					if(contaParaUsar.podeSacarHorario(valorTransacao)) {
+						contaParaUsar.sacar(valorTransacao);
+					}else {
+						JOptionPane.showMessageDialog(null, "Saque acima do limite");
+					}
+				}else		
 					JOptionPane.showMessageDialog(null, "Não tem saldo");
 			} else if (opcao == 2) { //Informações da conta
 				JOptionPane.showMessageDialog(null, contaParaUsar.retornaSituacao());
