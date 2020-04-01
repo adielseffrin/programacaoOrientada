@@ -13,8 +13,26 @@ public class Main {
 		//Cadastrar jogadores
 		//--Fazer para os 3 jogadores
 		Jogador jogador1 = new Jogador();
+		
+		jogador1.perguntarNomeJogador();
+		jogador1.perguntarNumeroDaSorte();
+
 		Jogador jogador2 = new Jogador();
+		
+		jogador2.perguntarNomeJogador();
+		
+		do {
+			jogador2.perguntarNumeroDaSorte();
+		} while(jogador1.getNumeroDaSorte() == jogador2.getNumeroDaSorte());
+
 		Jogador jogador3 = new Jogador();
+		
+		jogador3.perguntarNomeJogador();
+		
+		do {
+			jogador3.perguntarNumeroDaSorte();
+		} while(jogador1.getNumeroDaSorte() == jogador3.getNumeroDaSorte() ||
+				jogador2.getNumeroDaSorte() == jogador3.getNumeroDaSorte());
 		
 		//Criar um jogo 
 		Jogo jogo = new Jogo();
@@ -27,16 +45,24 @@ public class Main {
 		//Adicionar os jogadores, no jogo
 		//Preparar o jogo -> distribuir o dinheiro inicial
 		
-		//Enquanto o jogo não acabar
+		//Enquanto o jogo nÃ£o acabar
 		while(jogo.isJogoEmAndamento()) {
 			//Iniciar rodada
 			jogo.iniciarRodada();
 			jogo.verificarGanhador();
-			if(jogo.teveGanhador()) JOptionPane.showMessageDialog(null, String.format("Parabéns %s!!", jogo.getGanhador().getNome()));
+			
+			if (jogo.teveGanhador()) { 
+				double aposta = jogo.getValorAposta();
+				
+				Jogador ganhador = jogo.getGanhador();
+				ganhador.setSaldo(ganhador.getSaldo() + aposta * 3);
+				
+				JOptionPane.showMessageDialog(null, String.format("ParabÃ©ns %s!", ganhador.getNome()));
+			}
 		}
 		
 		
-		//Confere se alguém ganhou
+		//Confere se alguÃ©m ganhou
 		//Finaliza a rodada
 		//--Se alguem ficou sem dinheiro -> finaliza o jogo
 
