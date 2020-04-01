@@ -34,6 +34,18 @@ public class Jogo {
 		jogador3 = j;
 	}
 	
+	public Jogador getJogador1() {
+		return jogador1;
+	}
+	
+	public Jogador getJogador2() {
+		return jogador2;
+	}
+	
+	public Jogador getJogador3() {
+		return jogador3;
+	}
+	
 	public Jogador getGanhador() {
 		return ganhador;
 	}
@@ -45,9 +57,9 @@ public class Jogo {
 		// !true = false
 		// !false = true
 		while(!jogador1.podeJogar(valorAposta) || !jogador2.podeJogar(valorAposta) || !jogador3.podeJogar(valorAposta)) {
-		//ao entrar, sabemos que alguem n„o pode pagar tudo isso
+		//ao entrar, sabemos que alguem n√£o pode pagar tudo isso
 			//descobrir o menor valor de saldo de jogador 
-			//N√O PRECISO SABER QUEM …
+			//N√ÉO PRECISO SABER QUEM
 			menorAposta = jogador1.getSaldo();
 			
 			if(jogador2.getSaldo() < menorAposta)
@@ -56,10 +68,14 @@ public class Jogo {
 			if(jogador3.getSaldo() < menorAposta)
 				menorAposta = jogador3.getSaldo();
 			
-			JOptionPane.showMessageDialog(null, String.format("Valor muito alto. Valor m·ximo È de R$ %.2f",menorAposta), "Aposta muito alta", JOptionPane.WARNING_MESSAGE);		
+			JOptionPane.showMessageDialog(null, String.format("Valor muito alto. Valor m√°ximo √© de R$ %.2f",menorAposta), "Aposta muito alta", JOptionPane.WARNING_MESSAGE);		
 			
 			definirValorAposta();
 		}
+		
+		jogador1.setSaldo(jogador1.getSaldo() - valorAposta);
+		jogador2.setSaldo(jogador2.getSaldo() - valorAposta);
+		jogador3.setSaldo(jogador3.getSaldo() - valorAposta);
 		
 		sortearNumero();
 		//jogoEmAndamento = false;
@@ -73,7 +89,7 @@ public class Jogo {
 	private void sortearNumero() {
 		Random gerador = new Random();
 		numeroSorteado = gerador.nextInt(5) + 1; // [1,5]
-		JOptionPane.showMessageDialog(null, String.format("O n˙mero sorteado foi %d.%n%nConfira o resultado!", numeroSorteado), "Sorteio", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, String.format("O n√∫mero sorteado foi %d.%n%nConfira o resultado!", numeroSorteado), "Sorteio", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	private void definirValorAposta() {
@@ -81,6 +97,10 @@ public class Jogo {
 		temp = JOptionPane.showInputDialog(null, "Digite o valor da aposta", "Cadastro de apostas", JOptionPane.QUESTION_MESSAGE);
 		//String -> Double.parseDouble -> int
 		valorAposta = Double.parseDouble(temp);
+	}
+	
+	public double getValorAposta() {
+		return valorAposta;
 	}
 		
 	public void perguntarValorDinheiroInicial() {
