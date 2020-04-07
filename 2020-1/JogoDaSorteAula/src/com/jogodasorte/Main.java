@@ -9,36 +9,32 @@ public class Main {
 
 	public static void main(String[] args) {
 		//String nomeTemp;
-		
+		Jogador[] jogadores = new Jogador[6];
 		//Cadastrar jogadores
 		//--Fazer para os 3 jogadores
-		Jogador jogador1 = new Jogador();
+		//Jogador jogador1 
 		
-		jogador1.perguntarNomeJogador();
-		jogador1.perguntarNumeroDaSorte();
-
-		Jogador jogador2 = new Jogador();
+		/*int controle = 0;
+		while(controle < 3) {
+			jogadores[controle] = new Jogador();
+			jogadores[controle].perguntarNomeJogador();
+			jogadores[controle].perguntarNumeroDaSorte();
+			controle++;
+		}*/
 		
-		jogador2.perguntarNomeJogador();
-		
-		do {
-			jogador2.perguntarNumeroDaSorte();
-		} while(jogador1.getNumeroDaSorte() == jogador2.getNumeroDaSorte());
-
-		Jogador jogador3 = new Jogador();
-		
-		jogador3.perguntarNomeJogador();
-		
-		do {
-			jogador3.perguntarNumeroDaSorte();
-		} while(jogador1.getNumeroDaSorte() == jogador3.getNumeroDaSorte() ||
-				jogador2.getNumeroDaSorte() == jogador3.getNumeroDaSorte());
+		//for(inicio, cond fim, incremento)
+		for(int i=0;i < 5;i++) {
+			jogadores[i] = new Jogador();
+			jogadores[i].perguntarNomeJogador();
+			jogadores[i].perguntarNumeroDaSorte();
+		}
 		
 		//Criar um jogo 
-		Jogo jogo = new Jogo();
-		jogo.cadastrarJogador1(jogador1);
-		jogo.cadastrarJogador2(jogador2);
-		jogo.cadastrarJogador3(jogador3);
+		Jogo jogo = new Jogo(jogadores);
+		//jogo.cadastrarJogador1(jogadores[0]);
+		//jogo.cadastrarJogador2(jogadores[1]);
+		//jogo.cadastrarJogador3(jogadores[2]);
+		
 		jogo.distribuiDinheiroInicial(150);
 		
 		//**Eu (Adiel) quero que o jogo controle o jogo (Nao o main)
@@ -48,7 +44,7 @@ public class Main {
 		//Enquanto o jogo não acabar
 		while(jogo.isJogoEmAndamento()) {
 			//Iniciar rodada
-			jogo.iniciarRodada2();
+			jogo.iniciarRodada();
 			jogo.verificarGanhador();
 			
 			if (jogo.teveGanhador()) { 

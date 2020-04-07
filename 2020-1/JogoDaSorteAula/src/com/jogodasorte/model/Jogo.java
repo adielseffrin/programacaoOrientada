@@ -6,13 +6,15 @@ import com.jogodasorte.model.Jogador;
 import javax.swing.JOptionPane;
 
 public class Jogo {
-	private Jogador jogador1, jogador2, jogador3, ganhador;
+	private Jogador ganhador;
+	private Jogador[] jogadores;
 	private int numeroSorteado;
 	private double valorAposta;
 	private boolean jogoEmAndamento;
 
-	public Jogo() {
+	public Jogo(Jogador[] j) {
 		jogoEmAndamento = true;
+		jogadores = j;
 	}
 
 	// set -> definir
@@ -22,29 +24,12 @@ public class Jogo {
 		return jogoEmAndamento;
 	}
 
-	// public void setJogador1()
-	public void cadastrarJogador1(Jogador j) {
-		jogador1 = j;
+	public void setJogadores(Jogador[] j) {
+		jogadores = j;
 	}
 
-	public void cadastrarJogador2(Jogador j) {
-		jogador2 = j;
-	}
-
-	public void cadastrarJogador3(Jogador j) {
-		jogador3 = j;
-	}
-
-	public Jogador getJogador1() {
-		return jogador1;
-	}
-
-	public Jogador getJogador2() {
-		return jogador2;
-	}
-
-	public Jogador getJogador3() {
-		return jogador3;
+	public Jogador[] getJogadores() {
+		return jogadores;
 	}
 
 	public Jogador getGanhador() {
@@ -53,36 +38,50 @@ public class Jogo {
 
 	public void iniciarRodada() {
 		double menorAposta;
-		definirValorAposta(); // 300
+		boolean naoPodeJogar;
+		definirValorAposta(); // 100 -----> 200, 50, 50 , 60
 		// quando que eu preciso refazer a aposta?
 		// !true = false
 		// !false = true
-		while (!jogador1.podeJogar(valorAposta) || !jogador2.podeJogar(valorAposta)
-				|| !jogador3.podeJogar(valorAposta)) {
-			// ao entrar, sabemos que alguem não pode pagar tudo isso
-			// descobrir o menor valor de saldo de jogador
-			// NÃO PRECISO SABER QUEM
-			menorAposta = jogador1.getSaldo();
+		
 
-			if (jogador2.getSaldo() < menorAposta)
-				menorAposta = jogador2.getSaldo();
+		do {
+			naoPodeJogar = false;
+			for (int i = 0; i < jogadores.length; i++) {
+				naoPodeJogar = naoPodeJogar || !jogadores[i].podeJogar(valorAposta);
+			}
 
-			if (jogador3.getSaldo() < menorAposta)
-				menorAposta = jogador3.getSaldo();
+			if (naoPodeJogar) {
+				// ao entrar, sabemos que alguem não pode pagar tudo isso
+				// descobrir o menor valor de saldo de jogador
+				// NÃO PRECISO SABER QUEM
+				// menorAposta = jogador1.getSaldo();
+				menorAposta = jogadores[0].getSaldo();
+				for (int i = 1; i < jogadores.length; i++) {
+					if (jogadores[i].getSaldo() < menorAposta)
+						menorAposta = jogadores[i].getSaldo();
+				}
 
-			JOptionPane.showMessageDialog(null,
-					String.format("Valor muito alto. Valor máximo é de R$ %.2f", menorAposta), "Aposta muito alta",
-					JOptionPane.WARNING_MESSAGE);
+				/*
+				 * if (jogador2.getSaldo() < menorAposta) menorAposta = jogador2.getSaldo();
+				 * 
+				 * if (jogador3.getSaldo() < menorAposta) menorAposta = jogador3.getSaldo();
+				 */
 
-			definirValorAposta();
-		}
+				JOptionPane.showMessageDialog(null,
+						String.format("Valor muito alto. Valor máximo é de R$ %.2f", menorAposta), "Aposta muito alta",
+						JOptionPane.WARNING_MESSAGE);
+
+				definirValorAposta();// -> 400
+			}
+		} while (naoPodeJogar);
 
 		fazerCobranca();
 		sortearNumero();
 		// jogoEmAndamento = false;
 	}
 
-	public void iniciarRodada2() {
+	/*public void iniciarRodada2() {
 		double menorAposta;
 		do {
 			definirValorAposta();
@@ -107,13 +106,17 @@ public class Jogo {
 		fazerCobranca();
 		sortearNumero();
 
-	}
+	}*/
 
 	private void fazerCobranca() {
 		// cobra a aposta de cada jogador
-		jogador1.setSaldo(jogador1.getSaldo() - valorAposta);
-		jogador2.setSaldo(jogador2.getSaldo() - valorAposta);
-		jogador3.setSaldo(jogador3.getSaldo() - valorAposta);
+		for (int i = 0; i < jogadores.length; i++) {
+			jogadores[i].setSaldo(jogadores[i].getSaldo() - valorAposta);
+		}
+
+		// jogador1.setSaldo(jogador1.getSaldo() - valorAposta);
+		// jogador2.setSaldo(jogador2.getSaldo() - valorAposta);
+		// jogador3.setSaldo(jogador3.getSaldo() - valorAposta);
 	}
 
 	// cond1 && cond2
@@ -148,20 +151,29 @@ public class Jogo {
 
 	public void distribuiDinheiroInicial(double v) {
 		// criar forma de dara dinheiro pra galera -> setSaldo
-		jogador1.setSaldo(v);
-		jogador2.setSaldo(v);
-		jogador3.setSaldo(v);
+		for (int i = 0; i < jogadores.length; i++) {
+			jogadores[i].setSaldo(v);
+		}
+		// jogador1.setSaldo(v);
+		// jogador2.setSaldo(v);
+		// jogador3.setSaldo(v);
 	}
 
 	public void verificarGanhador() {
-		if (numeroSorteado == jogador1.getNumeroDaSorte())
-			ganhador = jogador1;
-		else if (numeroSorteado == jogador2.getNumeroDaSorte())
-			ganhador = jogador2;
-		else if (numeroSorteado == jogador3.getNumeroDaSorte())
-			ganhador = jogador3;
-		else
-			ganhador = null;
+		ganhador = null;
+		for (int i = 0; i < jogadores.length; i++) {
+			if (numeroSorteado == jogadores[i].getNumeroDaSorte()) {
+				ganhador = jogadores[i];
+				break; // sai de um loop -> e segue a vida
+			}
+		}
+
+		/*
+		 * if (numeroSorteado == jogador1.getNumeroDaSorte()) ganhador = jogador1; else
+		 * if (numeroSorteado == jogador2.getNumeroDaSorte()) ganhador = jogador2; else
+		 * if (numeroSorteado == jogador3.getNumeroDaSorte()) ganhador = jogador3; else
+		 * ganhador = null;
+		 */
 	}
 
 	public boolean teveGanhador() {
@@ -169,7 +181,12 @@ public class Jogo {
 	}
 
 	public void finalizarRodada() {
-		if (jogador1.getSaldo() == 0 || jogador2.getSaldo() == 0 || jogador3.getSaldo() == 0) {
+		boolean alguemZerou = false;
+		for (int j = 0; j < jogadores.length; j++) {
+			alguemZerou = alguemZerou || jogadores[j].getSaldo() == 0;
+		}
+
+		if (alguemZerou) {
 			jogoEmAndamento = false;
 			JOptionPane.showMessageDialog(null, listarResultadoFinal(), "Acabou!", JOptionPane.INFORMATION_MESSAGE);
 		}
