@@ -7,7 +7,7 @@ public class Jogador {
 	private int numeroDaSorte;
 	private double saldo;
 	
-	private static int contador = 0;
+	public static int contador = 0;
 
 	public Jogador() {
 		contador++;

@@ -48,7 +48,7 @@ public class Main {
 		//Enquanto o jogo não acabar
 		while(jogo.isJogoEmAndamento()) {
 			//Iniciar rodada
-			jogo.iniciarRodada();
+			jogo.iniciarRodada2();
 			jogo.verificarGanhador();
 			
 			if (jogo.teveGanhador()) { 
@@ -59,6 +59,9 @@ public class Main {
 				
 				JOptionPane.showMessageDialog(null, String.format("Parabéns %s!", ganhador.getNome()));
 			}
+			
+			jogo.finalizarRodada();
+			
 		}
 		
 		
