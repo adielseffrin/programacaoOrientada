@@ -8,41 +8,34 @@ import com.jogodasorte.model.Jogo;
 public class Main {
 
 	public static void main(String[] args) {
-		//String nomeTemp;
-		Jogador[] jogadores = new Jogador[6];
-		//Cadastrar jogadores
-		//--Fazer para os 3 jogadores
-		//Jogador jogador1 
+		int quantidadeJogadores = 0;
 		
-		/*int controle = 0;
-		while(controle < 3) {
-			jogadores[controle] = new Jogador();
-			jogadores[controle].perguntarNomeJogador();
-			jogadores[controle].perguntarNumeroDaSorte();
-			controle++;
-		}*/
+		//Solicita o número de jogadores que irão participar
+		do {
+			String tmp = JOptionPane.showInputDialog(null,
+					"Digite o número de jogadores!\n (maior que 1)",
+					"Número de jogadores",
+					JOptionPane.QUESTION_MESSAGE);
 		
-		//for(inicio, cond fim, incremento)
-		for(int i=0;i < 5;i++) {
+			quantidadeJogadores = Integer.parseInt(tmp);
+		} while(quantidadeJogadores <= 1);
+		
+		Jogador[] jogadores = new Jogador[quantidadeJogadores];
+
+		//Cria jogadores e configura o nome e número da sorte
+		for (int i = 0;i < jogadores.length;i++) {
 			jogadores[i] = new Jogador();
+			
 			jogadores[i].perguntarNomeJogador();
 			jogadores[i].perguntarNumeroDaSorte();
 		}
 		
 		//Criar um jogo 
 		Jogo jogo = new Jogo(jogadores);
-		//jogo.cadastrarJogador1(jogadores[0]);
-		//jogo.cadastrarJogador2(jogadores[1]);
-		//jogo.cadastrarJogador3(jogadores[2]);
-		
 		jogo.distribuiDinheiroInicial(150);
 		
-		//**Eu (Adiel) quero que o jogo controle o jogo (Nao o main)
-		//Adicionar os jogadores, no jogo
-		//Preparar o jogo -> distribuir o dinheiro inicial
-		
 		//Enquanto o jogo não acabar
-		while(jogo.isJogoEmAndamento()) {
+		while (jogo.isJogoEmAndamento()) {
 			//Iniciar rodada
 			jogo.iniciarRodada();
 			jogo.verificarGanhador();
@@ -51,23 +44,13 @@ public class Main {
 				double aposta = jogo.getValorAposta();
 				
 				Jogador ganhador = jogo.getGanhador();
-				ganhador.setSaldo(ganhador.getSaldo() + aposta * 3);
+				ganhador.setSaldo(ganhador.getSaldo() + aposta * jogadores.length);
 				
-				JOptionPane.showMessageDialog(null, String.format("Parabéns %s!", ganhador.getNome()));
+				JOptionPane.showMessageDialog(null, 
+						String.format("Parabéns %s!", ganhador.getNome()));
 			}
 			
 			jogo.finalizarRodada();
-			
 		}
-		
-		
-		//Confere se alguém ganhou
-		//Finaliza a rodada
-		//--Se alguem ficou sem dinheiro -> finaliza o jogo
-
-		
-		
-		
 	}
-
 }
