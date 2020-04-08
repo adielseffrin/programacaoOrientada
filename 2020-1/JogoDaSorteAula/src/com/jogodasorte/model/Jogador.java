@@ -11,9 +11,6 @@ public class Jogador {
 
 	public Jogador() {
 		contador++;
-		
-		//perguntarNomeJogador();
-		//perguntarNumeroDaSorte();
 	}
 
 	//- Perguntar o nome
@@ -23,10 +20,13 @@ public class Jogador {
 	 * Método para perguntar e salvar o nome do jogador
 	 * args []
 	 * return void
-	 * 	 * */
+	 */
 	public void perguntarNomeJogador() {
 		String nomeTemp;
-		nomeTemp = JOptionPane.showInputDialog(null, "Digite o nome do " + contador + "º jogador", "Cadastro de jogador", JOptionPane.QUESTION_MESSAGE);
+		nomeTemp = JOptionPane.showInputDialog(null, 
+				"Digite o nome do " + contador + "º jogador", 
+				"Cadastro de jogador", 
+				JOptionPane.QUESTION_MESSAGE);
 		nome = nomeTemp;
 	}
 	
@@ -36,12 +36,15 @@ public class Jogador {
 	 * Método para perguntar e salvar o número da sorte
 	 * args []
 	 * return void
-	 * 	 * */
+	 */
 	public void perguntarNumeroDaSorte() {
 		String tmp;
 		
 		do {
-			tmp = JOptionPane.showInputDialog(null, "Digite o seu número da sorte!\n (Entre 1 e 5)", "Cadastro de número da sorte", JOptionPane.QUESTION_MESSAGE);
+			tmp = JOptionPane.showInputDialog(null, 
+					"Digite o seu número da sorte!\n (Entre 1 e 5)", 
+					"Cadastro de número da sorte", 
+					JOptionPane.QUESTION_MESSAGE);
 		
 			// String -> Integer.parseInt() -> int
 			numeroDaSorte = Integer.parseInt(tmp);
@@ -65,12 +68,12 @@ public class Jogador {
 	}
 	
 	public boolean podeJogar(double valorEsperado) {
-	/*
-		 if(saldo >= valorEsperado)
+		/*
+		if(saldo >= valorEsperado)
 			return true;
 		else
 			return false;
-	*/
+		*/
 		return saldo >= valorEsperado;
 	}
 	
