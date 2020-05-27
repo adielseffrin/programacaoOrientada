@@ -15,28 +15,7 @@ public class Main {
 
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		JanelaPrincipal janela = new JanelaPrincipal(false);
-		Container pane = janela.getContentPane();
-		pane.setLayout(new BorderLayout());
-		
-		MenuLateral ml = new MenuLateral(janela);
-		
-		Topo topo = new Topo();
-		
-		Conteudo conteudo = new Conteudo();
-		
-		pane.add(ml.getPanel(), BorderLayout.WEST);
-		pane.add(topo.getPanel(), BorderLayout.NORTH);
-		pane.add(conteudo.getPanel(), BorderLayout.CENTER);
-		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JanelaPrincipal janela = new JanelaPrincipal();
 		janela.setVisible(true);
-		
-		
-		
-		
-		
-			
 	}
-
 }
