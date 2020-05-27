@@ -20,19 +20,19 @@ public class Controller implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton fonte = (JButton) e.getSource();
-		executarAcao(fonte.getLabel());
+		executarAcao(fonte.getText());
 
 	}
 
 	public void executarAcao(String fonte) {
 		switch (fonte) {
 		case "Cadastrar":
-			//Como exibir??
+			jp.getConteudo().getCadastro().show();
 			break;
 		case "Sair":
 			
 		default:
-			System.out.println("Não implementado");
+			System.out.println("NÃ£o implementado");
 		}
 	}
 

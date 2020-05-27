@@ -7,10 +7,14 @@ import javax.swing.JPanel;
 
 public class Conteudo {
 	private JPanel panel;
+	private TelaCadastro cadastro;
 	
 	public Conteudo() {
+		cadastro = new TelaCadastro();
+		cadastro.hide();
+		
 		panel = new JPanel();
-		panel.add(new TelaCadastro().getPanel());
+		panel.add(cadastro.getPanel());
 		panel.setVisible(true);
 	}
 	
@@ -18,4 +22,7 @@ public class Conteudo {
 		return panel;
 	}
 	
+	public TelaCadastro getCadastro() {
+		return cadastro;
+	}
 }
