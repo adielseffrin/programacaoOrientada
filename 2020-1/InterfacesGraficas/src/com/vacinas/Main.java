@@ -11,11 +11,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.galerao.JanelaComFlowLayout;
+
 public class Main {
 
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		JanelaPrincipal janela = new JanelaPrincipal();
 		janela.setVisible(true);
+		
+		JanelaComFlowLayout j = new JanelaComFlowLayout();
+		j.setVisible(true);
 	}
 }

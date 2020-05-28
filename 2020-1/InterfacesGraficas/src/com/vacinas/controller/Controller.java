@@ -30,7 +30,8 @@ public class Controller implements ActionListener {
 			jp.getConteudo().getCadastro().show();
 			break;
 		case "Sair":
-			
+			System.exit(0);
+			break;
 		default:
 			System.out.println("Não implementado");
 		}

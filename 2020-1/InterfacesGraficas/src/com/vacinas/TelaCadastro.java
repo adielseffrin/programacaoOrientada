@@ -17,7 +17,7 @@ public class TelaCadastro {
 		JLabel lblNome = new JLabel("Nome");
 		JTextField txtNome = new JTextField("nome");
 		
-		JLabel lblRaca = new JLabel("RaÃ§a");
+		JLabel lblRaca = new JLabel("Raça");
 		JTextField txtRaca = new JTextField("raca");
 				
 		JButton btnCadastro = new JButton("Ok");

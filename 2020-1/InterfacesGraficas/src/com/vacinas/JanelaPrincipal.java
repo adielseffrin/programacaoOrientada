@@ -24,7 +24,7 @@ public class JanelaPrincipal extends JFrame{
 		pane.add(ml.getPanel(), BorderLayout.WEST);
 		pane.add(topo.getPanel(), BorderLayout.NORTH);
 		pane.add(conteudo.getPanel(), BorderLayout.CENTER);
-		
+				
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	

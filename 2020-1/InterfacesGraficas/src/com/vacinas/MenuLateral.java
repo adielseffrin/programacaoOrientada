@@ -24,9 +24,14 @@ public class MenuLateral {
 		JButton btnCadastro = new JButton("Cadastrar");
 		btnCadastro.addActionListener(new Controller(master));
 		panel.add(btnCadastro);
+		
 		panel.add(new JButton("Consultar"));
 		panel.add(new JButton("Agenda"));
-		panel.add(new JButton("Sair"));
+		
+		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new Controller(master));
+		panel.add(btnSair);
+		
 		panel.setVisible(true);
 	}
 
