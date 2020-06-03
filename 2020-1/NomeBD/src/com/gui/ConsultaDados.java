@@ -13,12 +13,13 @@ public class ConsultaDados extends JFrame {
 	private JTextField apelido;
 	
 	private JButton consultar;
+	private JButton limpar;
 	
 	public ConsultaDados() {
 		this.setTitle("Consulta dados pessoais");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.setSize(310,210);
+		this.setSize(350,210);
 		
 		Container container = this.getContentPane();
 		container.setLayout(null);
@@ -39,6 +40,7 @@ public class ConsultaDados extends JFrame {
 		container.add(this.getApelido());
 		
 		container.add(this.getConsultar());
+		container.add(this.limparCampos());
 	}
 	
 	public JTextField getId() {
@@ -71,7 +73,7 @@ public class ConsultaDados extends JFrame {
 	public JButton getConsultar() {
 		if (consultar == null) {
 			consultar = new JButton("Consultar");
-			consultar.setBounds(195, 130, 105, 30);
+			consultar.setBounds(205, 130, 95, 30);
 			
 			consultar.addActionListener(new ConsultarListener(this));
 		}
@@ -79,9 +81,24 @@ public class ConsultaDados extends JFrame {
 		return consultar;
 	}
 	
+	public JButton limparCampos() {
+		if(limpar == null) {
+			limpar = new JButton("Limpar");
+			limpar.setBounds(100, 130, 95, 30);
+			
+			limpar.addActionListener(new LimparListener(this));
+		}
+		
+		return limpar;
+	}
+	
 	public void habilitaCampos(boolean habilita) {
 		this.getId().setEditable(habilita);
 		this.getNome().setEditable(habilita);
 		this.getApelido().setEditable(habilita);
+	}
+	
+	public void toogleLimpar() {
+		limpar.setVisible(!limpar.isVisible());
 	}
 }
