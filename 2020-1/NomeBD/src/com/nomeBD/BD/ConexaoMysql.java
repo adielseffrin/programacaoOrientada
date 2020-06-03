@@ -35,9 +35,11 @@ public class ConexaoMysql {
 			}
 
 		} catch (ClassNotFoundException e) { // Driver nao encontrado
+			e.printStackTrace();
 			System.out.println("O driver expecificado nao foi encontrado.");
 			// return null;
 		} catch (SQLException e) {
+			e.printStackTrace();
 			// Nao conseguindo se conectar ao banco
 			System.out.println("Nao foi possivel conectar ao Banco de Dados.");
 			// return null;
