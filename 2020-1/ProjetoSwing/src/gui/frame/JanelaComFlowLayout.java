@@ -44,10 +44,10 @@ public class JanelaComFlowLayout extends JFrame {
 		Container container = this.getContentPane();
 		container.setLayout(new FlowLayout());
 		
-		container.add(botao1);
-		container.add(botao2);
-		container.add(botao3);
-		container.add(botao4);
-		container.add(botao5);
+		//container.add(botao1);
+		//container.add(botao2);
+		//container.add(botao3);
+		//container.add(botao4);
+		//container.add(botao5);
 	}
 }
