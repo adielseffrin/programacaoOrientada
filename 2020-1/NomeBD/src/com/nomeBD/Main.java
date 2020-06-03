@@ -3,22 +3,37 @@ package com.nomeBD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.gui.ConsultaDados;
 import com.nomeBD.BD.ConexaoMysql;
 
 public class Main {
 
 	public static void main(String[] args) {
+		ConsultaDados consulta = new ConsultaDados();
+		consulta.setVisible(true);
+		/*
 		ConexaoMysql conn = new ConexaoMysql();
 		try {
 			conn.conectarMySQL();
 			String resultado = "";
 			String query = "select * from dados_pessoais";
 			ResultSet rs = conn.execute(query);
-			while (rs.next()) {
-				resultado += String.format("%d - %s%n", rs.getInt("id"), rs.getString("nome"));
+			if (rs.next()) {
+				resultado += String.format("%d - %s (%d)%n", 
+						rs.getInt("id"), 
+						rs.getString("nome"),
+						rs.getInt("idade"));
 			}
 			conn.FecharConexao();
 			
+			System.out.println(resultado);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		*/
+	}
+		
+		/*
 			System.out.println(resultado);
 			
 			//--------------------------------
@@ -85,11 +100,6 @@ public class Main {
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		
-		
-		
-		
 	}
-
+		*/
 }
