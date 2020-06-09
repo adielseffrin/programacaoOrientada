@@ -7,18 +7,27 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.gui.buttons.TriangularButton;
+import com.gui.buttons.TriangularReverseButton;
+
 public class ConsultaDados extends JFrame {
 	private JTextField id;
 	private JTextField nome;
 	private JTextField apelido;
 	
+	private JButton limpar;
+	private ConsultarListener _consultarListener = new ConsultarListener(this);
 	private JButton consultar;
+	private TriangularButton next;
+	private TriangularReverseButton prev;
+	
+	private JButton add;
 	
 	public ConsultaDados() {
 		this.setTitle("Consulta dados pessoais");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.setSize(310,210);
+		this.setSize(320,210);
 		
 		Container container = this.getContentPane();
 		container.setLayout(null);
@@ -39,6 +48,10 @@ public class ConsultaDados extends JFrame {
 		container.add(this.getApelido());
 		
 		container.add(this.getConsultar());
+		container.add(this.getAdd());
+		container.add(this.getLimpar());
+		container.add(this.getNext());
+		container.add(this.getPrev());
 	}
 	
 	public JTextField getId() {
@@ -71,17 +84,68 @@ public class ConsultaDados extends JFrame {
 	public JButton getConsultar() {
 		if (consultar == null) {
 			consultar = new JButton("Consultar");
-			consultar.setBounds(195, 130, 105, 30);
+			consultar.setBounds(205, 130, 90, 30);
 			
-			consultar.addActionListener(new ConsultarListener(this));
+			consultar.addActionListener(_consultarListener);
 		}
 		
 		return consultar;
+	}
+	
+	public JButton getLimpar() {
+		if (limpar == null) {
+			limpar = new JButton("Limpar");
+			limpar.setBounds(107, 130, 90, 30);
+			
+			limpar.addActionListener(new LimparListener(this));
+		}
+		
+		return limpar;
+	}
+	
+	public JButton getAdd() {
+		if (add == null) {
+			add = new JButton("Save");
+			add.setBounds(9, 130, 90, 30);
+			
+			add.addActionListener(new UpdateListener(this));
+		}
+		
+		return add;
+	}
+	
+	public TriangularButton getNext() {
+		if (next == null) {
+			next = new TriangularButton("");
+			next.setName("Next");
+			next.setBounds(230, 10, 30, 30);
+			
+			next.addActionListener(_consultarListener);
+			next.setVisible(false);
+		}
+		
+		return next;
+	}
+	
+	public TriangularReverseButton getPrev() {
+		if (prev == null) {
+			prev = new TriangularReverseButton("");
+			prev.setName("Prev");
+			prev.setBounds(190, 10, 30, 30);
+			
+			prev.addActionListener(_consultarListener);
+			
+			prev.setVisible(false);
+		}
+		
+		return prev;
 	}
 	
 	public void habilitaCampos(boolean habilita) {
 		this.getId().setEditable(habilita);
 		this.getNome().setEditable(habilita);
 		this.getApelido().setEditable(habilita);
+		this.getNext().setVisible(!habilita);
+		this.getPrev().setVisible(!habilita);
 	}
 }
