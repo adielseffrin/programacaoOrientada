@@ -15,11 +15,11 @@ public class NextListener implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent evento) {
-		ConexaoMysql conn = new ConexaoMysql();
-		PreparedStatement preparedStatement;
-
 		try {
-			conn.conectarMySQL();
+			ConexaoMysql conn = consulta.getConexaoMysql(); //new ConexaoMysql();
+			PreparedStatement preparedStatement;
+			
+			//conn.conectarMySQL();
 
 			String query = "select * from dados_pessoais";
 			if (!consulta.getId().getText().equals("")) {
@@ -40,7 +40,7 @@ public class NextListener implements ActionListener {
 				consulta.habilitaCampos(false);
 			}
 
-			conn.FecharConexao();
+			//conn.FecharConexao();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

@@ -13,7 +13,7 @@ import com.nomeBD.BD.ConexaoMysql;
 public class ConsultarListener implements ActionListener {
 	private ConsultaDados consulta;
 	private ResultSet rs = null;
-
+	
 	public ConsultarListener(ConsultaDados consulta) {
 		this.consulta = consulta;
 	}
@@ -22,14 +22,14 @@ public class ConsultarListener implements ActionListener {
 		JButton fonte = (JButton) evento.getSource();
 
 		if (fonte.getName() == null) {
-			ConexaoMysql conn = new ConexaoMysql();
-			PreparedStatement preparedStatement;
-
 			try {
-				conn.conectarMySQL();
+				ConexaoMysql conn = consulta.getConexaoMysql(); //new ConexaoMysql();
+				PreparedStatement preparedStatement;
+
+				//conn.conectarMySQL();
 
 				String query = "select * from dados_pessoais";
-				if (!consulta.getId().getText().equals("")) {
+				if (consulta.getId().isEditable() && !consulta.getId().getText().equals("")) {
 					query += " WHERE id = ?";
 					preparedStatement = conn.connection.prepareStatement(query);
 					preparedStatement.setInt(1, Integer.parseInt(consulta.getId().getText()));
@@ -46,7 +46,7 @@ public class ConsultarListener implements ActionListener {
 
 					consulta.habilitaCampos(false);
 				}
-
+				
 				// conn.FecharConexao();
 
 			} catch (Exception e) {
@@ -56,35 +56,51 @@ public class ConsultarListener implements ActionListener {
 		} else {
 			if (fonte.getName().equals("Next")) {
 				try {
-
 					if (rs.next()) {
-						consulta.getId().setText(String.valueOf(rs.getInt("id")));
-						consulta.getNome().setText(rs.getString("nome"));
-						consulta.getApelido().setText(rs.getString("apelido"));
-
-						consulta.habilitaCampos(false);
+						this.exibeDadosPessoais(rs.getInt("id"));
 					}
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			} else {
 				try {
-
-					if (rs.previous() ) {
-						consulta.getId().setText(String.valueOf(rs.getInt("id")));
-						consulta.getNome().setText(rs.getString("nome"));
-						consulta.getApelido().setText(rs.getString("apelido"));
-
-						consulta.habilitaCampos(false);
+					if (rs.previous()) {
+						this.exibeDadosPessoais(rs.getInt("id"));
 					}
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		}
+	}
+	
+	public void exibeDadosPessoais(int id) {
+		try {
+			ConexaoMysql conn = consulta.getConexaoMysql(); //new ConexaoMysql();
+			PreparedStatement preparedStatement;
 
+			//conn.conectarMySQL();
+
+			String query = "SELECT * FROM dados_pessoais WHERE id = ?";
+			
+			preparedStatement = conn.connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			if (rs.next()) {
+				consulta.getId().setText(String.valueOf(id));
+				consulta.getNome().setText(rs.getString("nome"));
+				consulta.getApelido().setText(rs.getString("apelido"));
+				
+				consulta.habilitaCampos(false);
+			}
+			
+			rs.close();
+			preparedStatement.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

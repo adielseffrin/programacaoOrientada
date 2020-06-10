@@ -1,6 +1,7 @@
 package com.gui;
 
 import java.awt.Container;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,6 +10,7 @@ import javax.swing.JTextField;
 
 import com.gui.buttons.TriangularButton;
 import com.gui.buttons.TriangularReverseButton;
+import com.nomeBD.BD.ConexaoMysql;
 
 public class ConsultaDados extends JFrame {
 	private JTextField id;
@@ -18,16 +20,20 @@ public class ConsultaDados extends JFrame {
 	private JButton limpar;
 	private ConsultarListener _consultarListener = new ConsultarListener(this);
 	private JButton consultar;
+	private JButton excluir;
+	
 	private TriangularButton next;
 	private TriangularReverseButton prev;
 	
 	private JButton add;
 	
+	private ConexaoMysql conexao;
+	
 	public ConsultaDados() {
 		this.setTitle("Consulta dados pessoais");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.setSize(320,210);
+		this.setSize(490,210);
 		
 		Container container = this.getContentPane();
 		container.setLayout(null);
@@ -50,6 +56,7 @@ public class ConsultaDados extends JFrame {
 		container.add(this.getConsultar());
 		container.add(this.getAdd());
 		container.add(this.getLimpar());
+		container.add(this.getExcluir());
 		container.add(this.getNext());
 		container.add(this.getPrev());
 	}
@@ -84,7 +91,7 @@ public class ConsultaDados extends JFrame {
 	public JButton getConsultar() {
 		if (consultar == null) {
 			consultar = new JButton("Consultar");
-			consultar.setBounds(205, 130, 90, 30);
+			consultar.setBounds(250, 130, 110, 30);
 			
 			consultar.addActionListener(_consultarListener);
 		}
@@ -95,7 +102,7 @@ public class ConsultaDados extends JFrame {
 	public JButton getLimpar() {
 		if (limpar == null) {
 			limpar = new JButton("Limpar");
-			limpar.setBounds(107, 130, 90, 30);
+			limpar.setBounds(130, 130, 110, 30);
 			
 			limpar.addActionListener(new LimparListener(this));
 		}
@@ -105,13 +112,25 @@ public class ConsultaDados extends JFrame {
 	
 	public JButton getAdd() {
 		if (add == null) {
-			add = new JButton("Save");
-			add.setBounds(9, 130, 90, 30);
+			add = new JButton("Salvar");
+			add.setBounds(9, 130, 110, 30);
 			
 			add.addActionListener(new UpdateListener(this));
 		}
 		
 		return add;
+	}
+	
+	public JButton getExcluir() {
+		if (excluir == null) {
+			excluir = new JButton("Excluir");
+			excluir.setBounds(370, 130, 110, 30);
+			
+			excluir.setEnabled(false);
+			excluir.addActionListener(new ExcluirListener(this));
+		}
+		
+		return excluir;
 	}
 	
 	public TriangularButton getNext() {
@@ -141,11 +160,25 @@ public class ConsultaDados extends JFrame {
 		return prev;
 	}
 	
-	public void habilitaCampos(boolean habilita) {
-		this.getId().setEditable(habilita);
+	public void habilitaEdicao(boolean habilita) {
 		this.getNome().setEditable(habilita);
 		this.getApelido().setEditable(habilita);
+	}
+	
+	public void habilitaCampos(boolean habilita) {
+		this.getId().setEditable(habilita);
 		this.getNext().setVisible(!habilita);
 		this.getPrev().setVisible(!habilita);
+		
+		this.getExcluir().setEnabled(!habilita);
+	}
+	
+	public ConexaoMysql getConexaoMysql() throws ClassNotFoundException, SQLException {
+		if (conexao == null) {
+			conexao = new ConexaoMysql();
+			conexao.conectarMySQL();
+		}
+		
+		return conexao;
 	}
 }
