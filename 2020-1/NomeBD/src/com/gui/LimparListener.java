@@ -20,6 +20,8 @@ public class LimparListener implements ActionListener {
 		consulta.getApelido().setText("");
 
 		consulta.habilitaCampos(true);
+		
+		consulta.getId().requestFocus();
 	}
 
 }
