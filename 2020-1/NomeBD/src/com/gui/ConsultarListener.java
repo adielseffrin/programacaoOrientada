@@ -8,6 +8,8 @@ import java.sql.SQLException;
 
 import javax.swing.JButton;
 
+import com.gui.DAO.DadosPessoaisDAO;
+import com.gui.model.DadosPessoais;
 import com.nomeBD.BD.ConexaoMysql;
 
 public class ConsultarListener implements ActionListener {
@@ -51,6 +53,12 @@ public class ConsultarListener implements ActionListener {
 
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
+			}
+			
+			consulta.getModelo().setNumRows(0);
+			DadosPessoaisDAO dao = new DadosPessoaisDAO();
+			for(DadosPessoais dp : dao.getDadosPessoais(consulta)) {
+				consulta.getModelo().addRow(new Object[] {dp.getId(), dp.getNome(), dp.getApelido(), dp.getIdade()});
 			}
 
 		} else {
@@ -104,3 +112,4 @@ public class ConsultarListener implements ActionListener {
 	}
 
 }
+//https://www.devmedia.com.br/jtable-utilizando-o-componente-em-interfaces-graficas-swing/28857

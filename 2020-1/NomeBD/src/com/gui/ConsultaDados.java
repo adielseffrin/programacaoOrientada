@@ -1,12 +1,18 @@
 package com.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.GridLayout;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import com.gui.buttons.TriangularButton;
 import com.gui.buttons.TriangularReverseButton;
@@ -25,6 +31,11 @@ public class ConsultaDados extends JFrame {
 	private TriangularButton next;
 	private TriangularReverseButton prev;
 	
+	private DefaultTableModel modelo;
+	private JPanel painelTabela;
+	private JScrollPane scrollPane;
+	private JTable tabela;
+	
 	private JButton add;
 	
 	private ConexaoMysql conexao;
@@ -33,7 +44,7 @@ public class ConsultaDados extends JFrame {
 		this.setTitle("Consulta dados pessoais");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.setSize(490,210);
+		this.setSize(500,410);
 		
 		Container container = this.getContentPane();
 		container.setLayout(null);
@@ -59,6 +70,10 @@ public class ConsultaDados extends JFrame {
 		container.add(this.getExcluir());
 		container.add(this.getNext());
 		container.add(this.getPrev());
+		container.add(this.getPainelTabela(this.getScrollPane(this.getTabela())));
+		
+		
+		
 	}
 	
 	public JTextField getId() {
@@ -98,6 +113,7 @@ public class ConsultaDados extends JFrame {
 		
 		return consultar;
 	}
+	
 	
 	public JButton getLimpar() {
 		if (limpar == null) {
@@ -158,6 +174,49 @@ public class ConsultaDados extends JFrame {
 		}
 		
 		return prev;
+	}
+	
+	public JTable getTabela() {
+		if (tabela == null) {
+			tabela = new JTable(this.getModelo());
+			modelo.addColumn("id");
+			modelo.addColumn("Nome");
+			modelo.addColumn("Apelido");
+			modelo.addColumn("Idade");
+			tabela.setVisible(true);
+		}
+		
+		return tabela;
+	}
+	
+	public JPanel getPainelTabela(JScrollPane scrollPane) {
+		if (painelTabela == null) {
+			painelTabela = new JPanel();
+			painelTabela.setLayout(new GridLayout(1,1));
+			painelTabela.setBounds(10, 165, 470, 200);
+			painelTabela.setVisible(true);
+			painelTabela.add(scrollPane);
+		}
+		
+		return painelTabela;
+	}
+	
+	public DefaultTableModel getModelo() {
+		if(modelo == null) {
+			modelo = new DefaultTableModel();
+		}
+		
+		return modelo;
+	}
+	
+	public JScrollPane getScrollPane(JTable tabela) {
+				
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane(tabela);
+			scrollPane.setVisible(true);
+		}
+		
+		return scrollPane;
 	}
 	
 	public void habilitaEdicao(boolean habilita) {
