@@ -3,6 +3,7 @@ package com.boletim;
 public class Aluno {
 	private String nome, materia;
 	private double nota1, nota2;
+	public String apelido;
 	
 	public Aluno(String n) {
 		this.nome = n;

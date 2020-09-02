@@ -22,7 +22,7 @@ public class Main {
 		andrino.setNota(notaDoAndrino);
 		
 		System.out.println("A nota do "+ andrino.getNome() +" é "+ andrino.getNota());
-		
+
 
 		//TODO (A fazer)
 		//Perguntar a nota do gabriel
