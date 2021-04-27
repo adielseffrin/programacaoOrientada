@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="CincoNomes/src"/>
+	<classpathentry kind="src" path="Heranca/src"/>
+	<classpathentry kind="src" path="operadores/src"/>
+	<classpathentry kind="src" path="Ordenador/src"/>
+	<classpathentry kind="src" path="testeArgumentos/src"/>
+	<classpathentry kind="src" path="variaveis/src"/>
+	<classpathentry kind="output" path="CincoNomes/bin"/>
+</classpath>
