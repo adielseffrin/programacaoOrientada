@@ -70,16 +70,16 @@ public class Main {
 					break;
 				case 4:
 					//como resolver esse erro para gerente e coord.
-					colab[user].conferirRelatorios();
+					((Gerente)colab[user]).conferirRelatorios();
 					break;
 				case 5:
 					//como resolver esse erro para gerente e coord.
-					colab[user].efetuarPagamento();
+					((Gerente)colab[user]).efetuarPagamento();
 					break;
 				case 6:
 					//como resolver esse erro para gerente e coord.
 					//Aqui, como é um vetor, foi passada uma referência
-					colab[user].cadastrarColaborador(colab, colaboradoresCadastrados++);
+					((Coordenador)colab[user]).cadastrarColaborador(colab, colaboradoresCadastrados++);
 					break;
 				case 7:
 					for(Funcionario f: colab) {
@@ -87,7 +87,7 @@ public class Main {
 						f.verDadosPessoais();
 					}
 				}
-				c.listarAcoes();
+				//c.listarAcoes();
 				opt = in.nextInt();
 			}
 			
